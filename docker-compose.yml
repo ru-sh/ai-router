@@ -1,0 +1,19 @@
+services:
+  ai-router:
+    image: shakirovruslan/ai-router
+    ports:
+      - "8034:8034"
+    environment:
+      # Add your AI service configuration here
+      # Replace with your actual service URLs
+      AI_SERVICE_OLLAMA: "http://host.docker.internal:11434" # Example for Ollama on host (requires Docker Desktop or similar)
+      # AI_SERVICE_ANOTHERAI: "http://another-service-host:port"
+      PORT: 8034 # Explicitly set the port if needed, though default in app is 8034
+    init: true # This is crucial for ensuring signals like Ctrl+C (SIGINT) are forwarded correctly
+    restart: unless-stopped # Restart the container unless it is explicitly stopped
+
+# Note on AI_SERVICE_OLLAMA:
+# "host.docker.internal" is a special DNS name that resolves to the host machine's IP address
+# from within a Docker container. This is primarily supported on Docker Desktop for Mac and Windows.
+# If running on Linux or a different setup, you might need to find the correct gateway IP or
+# connect the containers to the same network and use container names if the AI service is also in Docker.
