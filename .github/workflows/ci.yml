@@ -31,6 +31,13 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: shakirovruslan/ai-router
+          tags: |
+            type=schedule,pattern={{date 'YYYYMMDD'}}
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=sha,pattern={{sha}}
+            latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -39,4 +46,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
+          platforms: |
+            linux/amd64
+            linux/arm64
