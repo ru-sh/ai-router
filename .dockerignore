@@ -1,0 +1,24 @@
+# Git files
+.git
+.gitignore
+
+# Node dependencies
+node_modules
+
+# Build output
+dist
+
+# Runtime environment variables (should be injected, not copied)
+.env*
+
+# Docker files
+Dockerfile
+src/.dockerfile
+
+# Documentation
+*.md
+
+# Local development artifacts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
